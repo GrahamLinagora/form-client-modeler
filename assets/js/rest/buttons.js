@@ -16,7 +16,7 @@ define([
   	},
 
 		requestFormCreation: function() {
-			var formName = modelHelper.getCurrentFormModel().name;
+			var formName = modelHelper.getCurrentFormName();
 			var formModel = modelHelper.getCurrentFormModel();
 
 			var form = {
