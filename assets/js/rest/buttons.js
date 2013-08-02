@@ -37,13 +37,13 @@ define([
 		},
 
 		requestFormDeletion: function() {
-			if ($('#input').val().length == 0) {
+			if ($('#userinput').val().length == 0) {
 				return;
 			}
 
 			$.ajax({
 				type: "DELETE",
-				url: serverConf.getServerRootUrl()+"/forms/"+$('#input').val(),
+				url: serverConf.getServerRootUrl()+"/forms/"+$('#userinput').val(),
 				success: function (data)
 				{
 					$('#result').text(data);
@@ -52,18 +52,18 @@ define([
 		},
 
 		requestFormFind: function() {
-			$.getJSON(serverConf.getServerRootUrl()+"/forms?name="+$('#input').val(), function (data){
+			$.getJSON(serverConf.getServerRootUrl()+"/forms?name="+$('#userinput').val(), function (data){
 				$('#result').text(JSON.stringify(data));
 			});
 		},
 		
 		requestFormLoad: function() {
-			if ($('#input').val().length == 0) {
+			if ($('#userinput').val().length == 0) {
 				return;
 			}
 
 			var self = this;
-			$.getJSON(serverConf.getServerRootUrl()+"/forms/"+$('#input').val(), function (data){
+			$.getJSON(serverConf.getServerRootUrl()+"/forms/"+$('#userinput').val(), function (data){
 				$('#result').text(JSON.stringify(data));
 
 				modelHelper.setCurrentFormModel(data.model);
