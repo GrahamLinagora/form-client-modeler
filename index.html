@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<title>Form Editor</title>
-		<script src="resources/js/rest.js"></script>
+		<script src="resources/js/debug.js"></script>
 
     <link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/lib/bootstrap-responsive.min.css" rel="stylesheet">
@@ -15,11 +15,16 @@
   </head>
 
   <body>
-		<button onclick="requestFormCreation()">Create form</button>
-		<button onClick="requestFormDeletion()">Delete Form</button>
-		<button onClick="requestFormFind()">Find Form</button>
-		<button onClick="requestFormLoad()">Load Form</button>
-		<input type="text" id="input" class="writable"></input>
+		<div class="restButtons" id="restButtons">
+			<button class="createButton">Create form</button>
+			<button class="deleteButton">Delete Form</button>
+			<button class="findButton">Find Form</button>
+			<button class="loadButton">Load Form</button>
+			
+			<!--debug utilities : TODO remove this-->
+			<button onClick="clearDebugDiv()">Clear Div</button>
+			<input type="text" id="input" class="writable"></input>
+		</div>
 		<div id="result" class="result_div"></div>
 	
     <div class="navbar navbar-fixed-top">

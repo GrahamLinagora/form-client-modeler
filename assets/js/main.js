@@ -21,6 +21,8 @@ require.config({
     , helper      : "../helper"
     , templates   : "../templates"
     , views       : "../views"
+		//NEW : add the rest related js files to the require config
+		, rest				:	"../rest"
   }
 });
 require([ 'app/app'], function(app){

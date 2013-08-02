@@ -1,0 +1,3 @@
+function clearDebugDiv() {
+	$('#result').text('');
+}

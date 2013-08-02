@@ -3,11 +3,15 @@ define([
       , "views/temp-snippet"
       , "helper/pubsub"
       , "text!templates/app/renderform.html"
+			, "rest/formModel"
+			, "rest/snippetHelper"
 ], function(
   $, _, Backbone
   , TempSnippetView
   , PubSub
   , _renderForm
+	, restModel
+	, snippetHelper
 ){
   return Backbone.View.extend({
     tagName: "fieldset"
@@ -16,13 +20,14 @@ define([
       this.collection.on("remove", this.render, this);
       this.collection.on("change", this.render, this);
 			
-			//NEW : whenever the built collection of snippets changes : build and save the model
+			//NEW : whenever the built collection of snippets changes : build and save the model of the form
       this.collection.on("add", this.saveFormModel, this);
       this.collection.on("remove", this.saveFormModel, this);
 			this.collection.on("change", this.saveFormModel, this);
 
-			//NEW : define the custom "load" event to load a form
-      PubSub.on("loadForm", this.loadForm);
+			//NEW : define the custom "load" event to load a form when this event is triggered
+			//NB. the third argument this is mandatory in order to be able to access the collection in the loadForm method
+      PubSub.on("loadForm", this.loadForm, this);
 
       PubSub.on("mySnippetDrag", this.handleSnippetDrag, this);
       PubSub.on("tempMove", this.handleTempMove, this);
@@ -46,15 +51,34 @@ define([
       this.delegateEvents();
     }
 
-		//NEW : function that saves the formModel in a var of the rest handler
+		//NEW : function that saves the formModel in a helper for the rest handler
 		, saveFormModel: function() {
-			var modelToSave = this.collection.getFormModel([]);
-			saveCurrentFormModel(modelToSave);
+			var modelToSave = restModel.buildFormModel(this.collection.getFieldModels());
+			restModel.setCurrentFormModel(modelToSave);
 		}
 
-		//NEW : 
-		, loadForm: function() {
-			console.log('loadFormEvent');
+		//NEW : loads a form in the editor
+		, loadForm: function(model) {
+			var modelToLoad = restModel.getCurrentFormModel();
+
+			//first empty the collection
+			this.collection.reset();
+
+			//for each field model, build the corresponding snippet and add it to the collection
+			var fieldCpt=0;
+			while(modelToLoad['field'+fieldCpt]) {
+
+//TODO remove trace
+console.log('DEBUG modelToLoad[fieldi] '+JSON.stringify(modelToLoad['field'+fieldCpt]));
+
+				var snippet = snippetHelper.getSnippet(modelToLoad['field'+fieldCpt]);
+
+//TODO remove trace
+console.log('DEBUG addedtocollection'+JSON.stringify(snippet));
+
+				this.collection.add(snippet);
+				fieldCpt++;
+			}
 		}
 
     , getBottomAbove: function(eventY){
