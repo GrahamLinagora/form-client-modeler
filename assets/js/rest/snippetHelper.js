@@ -1,5 +1,5 @@
 define([
-   "jquery" ,
+   "jquery"
    , "text!data/input.json", "text!data/radio.json", "text!data/select.json", "text!data/buttons.json"
 ], function(
   $,
@@ -29,22 +29,15 @@ define([
 			return snippetCopy;
     },
 
+		//searchs the json files containing the field patterns
+		//to find the pattern for this field type
 		getSnippetDefaultJSON: function(fieldType) {
-
-//TODO remove trace
-console.log("DEBUG "+inputJSON);
-
 			var arrayOfJSONArray = new Array();
 			arrayOfJSONArray[0] = this.getNameFieldDefaultJSON();
-			arrayOfJSONArray[1] = JSON.parse(radioJSON);
-			arrayOfJSONArray[2] = JSON.parse(selectJSON);
-			arrayOfJSONArray[3] = JSON.parse(buttonsJSON);
-//TODO arrayOfJSONArray[4] = JSON.parse(inputJSON);
-//throws error because inputjson is undefined 
-//however the data from inputjson is in the array of json whereas buttons are not
-//console.log('Debug taboftab : '+JSON.stringify(arrayOfJSONArray));
-//console.log('Debug taboftab : '+arrayOfJSONArray.length);
-
+			arrayOfJSONArray[1] = JSON.parse(inputJSON);
+			arrayOfJSONArray[2] = JSON.parse(radioJSON);
+			arrayOfJSONArray[3] = JSON.parse(selectJSON);
+			arrayOfJSONArray[4] = JSON.parse(buttonsJSON);
 
 			for(i=0; i<arrayOfJSONArray.length; i++) {
 				var snippetJSON = this.searchJSONArray(arrayOfJSONArray[i], fieldType);
