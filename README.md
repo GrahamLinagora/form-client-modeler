@@ -17,6 +17,4 @@ TODO
 Known bugs
 ----------
 
-* The properties of a field which are chosen with a select cannot be loaded yet
-
 * http error 404 for the OPTIONS method when the form deletion is called

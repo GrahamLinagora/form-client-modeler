@@ -19,8 +19,17 @@ define([
 
 			for(var fieldValue in fieldModel.fieldValues) {
 				if(snippetCopy.fields[fieldValue].value instanceof Array) {
-					//TODO case of the inputsize : fieldValue is an array of the different possibilities
-					//for the moment such properties are not loaded
+					//case of a field whose value is chosen using a select
+					//fieldValue is an array of the different possibilities
+					for(choiceCpt=0; choiceCpt<snippetCopy.fields[fieldValue].value.length; choiceCpt++) {
+						var fieldValueChoice = snippetCopy.fields[fieldValue].value[choiceCpt];
+						//reset the default value of the select
+						fieldValueChoice.selected = false;
+						//if this is the matching choice, make it the value for the select						
+						if(fieldValueChoice.value == fieldModel.fieldValues[fieldValue]) {
+							fieldValueChoice.selected = true;
+						}
+					}
 				}
 				else {
 					snippetCopy.fields[fieldValue].value = fieldModel.fieldValues[fieldValue];
