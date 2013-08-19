@@ -62,7 +62,6 @@ define([
 				return;
 			}
 
-			var self = this;
 			$.getJSON(serverConf.getServerRootUrl()+"/forms/"+$('#userinput').val(), function (data){
 				$('#result').text(JSON.stringify(data));
 
