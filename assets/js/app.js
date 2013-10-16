@@ -4,17 +4,28 @@ define([
        , "views/tab" , "views/my-form"
        , "text!data/input.json", "text!data/radio.json", "text!data/select.json", "text!data/buttons.json"
        , "text!templates/app/render.html",  "text!templates/app/about.html",
-		"rest/buttons"
+	
+	//NEW
+	"display/displayHelper",
+	"display/formListView",
+	"display/formEditorButtons"
+
 ], function(
   $, _, Backbone
   , SnippetsCollection, MyFormSnippetsCollection
   , TabView, MyFormView
   , inputJSON, radioJSON, selectJSON, buttonsJSON
   , renderTab, aboutTab
-	, ButtonsView
+	, DisplayHelper
+	, FormListView
+	, EditorButtons
 ){
   return {
     initialize: function(){
+
+			//NEW init display : hide edition div
+			//TODO improve this
+			DisplayHelper.initDisplay();
 
       //Bootstrap tabs from json.
       new TabView({
@@ -59,8 +70,11 @@ define([
         ])
       });
 
-			//NEW : tells backbone to use the logic defined for rest buttons
-			new ButtonsView({ el: $('#restButtons') });
+			//NEW : tells backbone to use the logic defined for buttons form the edition div
+			new EditorButtons({ el: $('#formEditionDiv') });
+
+			//NEW : View of the form list
+			new FormListView({ el: $('#formListDiv') });
     }
   }
 });

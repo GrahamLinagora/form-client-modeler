@@ -23,6 +23,8 @@ require.config({
     , views       : "../views"
 		//NEW : add the rest related js files to the require config
 		, rest				:	"../rest"
+		//TODO should not be here
+		, display 		: "../display"
   }
 });
 require([ 'app/app'], function(app){

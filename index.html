@@ -15,31 +15,53 @@
   </head>
 
   <body>
-		<div class="restButtons" id="restButtons">
-			<button class="createButton">Create form</button>
-			<button class="deleteButton">Delete Form</button>
-			<button class="findButton">Find Form</button>
-			<button class="loadButton">Load Form</button>
-			
-			<!--debug utilities : TODO remove this-->
-			<button onClick="clearDebugDiv()">Clear Div</button>
-			<input type="text" id="userinput" class="writable"></input>
+		<div id="formListDiv" class="container">
+			<button class="newForm btn btn-primary">Nouveau Formulaire</button>
+			<div id="formTableDiv" style="width:800px;height:200px;overflow:auto;border:1px solid;margin-left:auto;margin-right:auto;">
+				<table id="formTable" class="table table-condensed table-hover">
+					<thead>
+						<tr>
+							<th width="30%">Formulaire</th>
+							<th width="30%">Créé le</th>
+							<th width="40%">Action</th>
+						</tr>
+					</thead>
+					<tbody id="formTableBody">
+					<!-- The list of forms will be added here -->
+					</tbody>
+				</table>
+			</div>
 		</div>
-		<div id="result" class="result_div"></div>
 	
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="#">Bootstrap Form Builder</a>
-        </div>
-      </div>
-    </div>
-    <div class="container">
+    <div id="formEditionDiv" class="container">
+			<!-- Form editor Controls -->
+			<fieldset>
+				<div class="control-group">
+					<div class="controls">
+						<button id="saveButton" class="btn saveForm">Sauvegarder</button>
+						<button id="closeButton" class="btn closeEditor">Fermer</button>
+						<button id="deployButton" class="btn deployForm">Mettre en ligne</button>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="nameInput">Nom</label>
+					<div class="controls">
+						<input id="nameInput" name="nameInput" type="text" class="input-xlarge">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="descInput">Description</label>
+					<div class="controls">
+						<input id="descInput" name="descInput" type="text"class="input-xlarge">
+					</div>
+				</div>
+			</fieldset>
+
       <div class="row clearfix">
         <!-- Building Form. -->
         <div class="span6">
           <div class="clearfix">
-            <h2>Your Form</h2>
+            <h2>Aperçu</h2>
             <hr>
             <div id="build">
               <form id="target" class="form-horizontal">

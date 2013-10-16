@@ -17,4 +17,6 @@ TODO
 Known bugs
 ----------
 
+* Some Ajax calls create client error : 2nd save of a form and instance creation
+
 * http error 404 for the OPTIONS method when the form deletion is called

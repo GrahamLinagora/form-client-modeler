@@ -1,16 +1,16 @@
 define([
-       "jquery", "underscore", "backbone"
-      , "views/temp-snippet"
-      , "helper/pubsub"
-      , "text!templates/app/renderform.html"
-			, "rest/formModel"
-			, "rest/snippetHelper"
+	"jquery", "underscore", "backbone"
+	, "views/temp-snippet"
+	, "helper/pubsub"
+	, "text!templates/app/renderform.html"
+	, "rest/formModelHelper"
+	, "rest/snippetHelper"
 ], function(
   $, _, Backbone
   , TempSnippetView
   , PubSub
   , _renderForm
-	, restModel
+	, formModelHelper
 	, snippetHelper
 ){
   return Backbone.View.extend({
@@ -53,29 +53,21 @@ define([
 
 		//NEW : function that saves the formModel in a helper for the rest handler
 		, saveFormModel: function() {
-			var modelToSave = restModel.buildFormModel(this.collection.getFieldModels());
-			restModel.setCurrentFormModel(modelToSave);
+			var fieldsToSave = formModelHelper.buildFormFields(this.collection.getFieldModels());
+			formModelHelper.getCurrentFormModel().setFields(fieldsToSave);
 		}
 
 		//NEW : loads a form in the editor
 		, loadForm: function(model) {
-			var modelToLoad = restModel.getCurrentFormModel();
+			var fieldsToLoad = formModelHelper.getCurrentFormModel().getFields();
 
 			//first empty the collection
 			this.collection.reset();
 
 			//for each field model, build the corresponding snippet and add it to the collection
 			var fieldCpt=0;
-			while(modelToLoad['field'+fieldCpt]) {
-
-//TODO remove trace
-console.log('DEBUG modelToLoad[fieldi] '+JSON.stringify(modelToLoad['field'+fieldCpt]));
-
-				var snippet = snippetHelper.getSnippet(modelToLoad['field'+fieldCpt]);
-
-//TODO remove trace
-console.log('DEBUG addedtocollection'+JSON.stringify(snippet));
-
+			while(fieldsToLoad['field'+fieldCpt]) {
+				var snippet = snippetHelper.getSnippet(fieldsToLoad['field'+fieldCpt]);
 				this.collection.add(snippet);
 				fieldCpt++;
 			}
