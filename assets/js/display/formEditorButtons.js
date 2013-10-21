@@ -74,7 +74,10 @@ define([
 			//Link with execution application
 			//Rest call to create a new Instance in the DB
 			
-			restHelper.requestFormSave(restHelper.requestInstanceCreation(function(){//TODO));
+			restHelper.requestFormSave(restHelper.requestInstanceCreation(function(){
+					//TODO
+				}
+			));
 		},
 
 		saveFormName: function() {
