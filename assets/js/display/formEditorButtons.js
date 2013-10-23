@@ -75,7 +75,8 @@ define([
 			//Rest call to create a new Instance in the DB
 			
 			restHelper.requestFormSave(restHelper.requestInstanceCreation(function(){
-					//TODO
+					//TODO change this
+					window.alert('The form has been deployed.');
 				}
 			));
 		},
