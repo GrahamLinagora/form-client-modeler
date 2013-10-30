@@ -6,7 +6,6 @@ define([
        , "text!templates/app/render.html",  "text!templates/app/about.html",
 	
 	//NEW
-	"display/displayHelper",
 	"display/formListView",
 	"display/formEditorButtons"
 
@@ -16,16 +15,11 @@ define([
   , TabView, MyFormView
   , inputJSON, radioJSON, selectJSON, buttonsJSON
   , renderTab, aboutTab
-	, DisplayHelper
 	, FormListView
 	, EditorButtons
 ){
   return {
     initialize: function(){
-
-			//NEW init display : hide edition div
-			//TODO improve this
-			DisplayHelper.initDisplay();
 
       //Bootstrap tabs from json.
       new TabView({
